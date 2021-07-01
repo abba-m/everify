@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "name": "Course",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Department": {
+      "model": "department",
+      "via": "courses"
+    },
+    "students": {
+      "via": "courses",
+      "collection": "student"
+    },
+    "Unit": {
+      "type": "integer",
+      "required": true
+    },
+    "Code": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

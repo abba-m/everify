@@ -1,0 +1,263 @@
+$secondary: #304d6d;
+$success: #99e753;
+$gray: #708090;
+$lightGray: #778899;
+$textColor: #f0f8ff;
+
+.container {
+  margin: 0 !important;
+  max-width: 75% !important;
+  padding: 24px;
+  height: 100vh;
+  left: 25vw;
+  position: relative;
+  transition: all 0.5 ease-in-out;
+}
+
+.sidebar {
+  position: fixed;
+  color: $textColor;
+  padding: 24px 0;
+  height: 100vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: $gray;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+
+  a {
+    color: $textColor;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  img {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    margin: 0 0 10px 20px;
+    align-self: center;
+    border: 1px solid $textColor;
+  }
+  div {
+    margin-bottom: 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0 24px;
+  }
+  h6 {
+    color: red;
+    font-weight: 200;
+    cursor: pointer;
+    padding: 0 24px;
+    transition: 0.5s;
+    transition-property: font-weight, font-size;
+    &:hover {
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  ul {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    padding: 0;
+    margin-bottom: 20px;
+
+    li {
+      list-style: none;
+      line-height: 50px;
+      padding-left: 24px;
+      transition: 0.5s;
+      transition-property: background;
+
+      &:hover {
+        background-color: $secondary;
+      }
+
+      &.active {
+        background-color: $lightGray;
+      }
+
+      a {
+        color: $textColor;
+        text-decoration: none;
+
+        span {
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+.login-img {
+  margin: auto;
+  width: 300px;
+  height: 300px;
+}
+
+.d-scan-page-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.d-scan-page-card {
+  margin-top: 100px;
+}
+
+.d-scan-page-select {
+  border-radius: 50px;
+  background: transparent;
+  &:hover {
+    outline: none;
+  }
+}
+
+.d-scan-page-select > select {
+  color: #99e753;
+  border: none;
+  font-size: 1.8em;
+}
+
+.total-scan-display {
+  align-self: center;
+}
+
+.d-scan-page-button {
+  position: absolute;
+  left: 40%;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-scan-page-button > svg {
+  align-self: center;
+}
+
+#close-profile-card {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+.candidate-avatar {
+  width: 100px;
+  height: 100px;
+  float: right;
+  margin-top: 30px;
+  border-radius: 100px;
+  border: 1px solid $secondary;
+}
+
+.scan-box {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.close-cam {
+  position: relative;
+  bottom: 50px;
+  left: 45%;
+  color: red;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.styled-text {
+  font-family: "Comfortaa", cursive;
+}
+
+#menu-toggler,
+#close-nav {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .login-img {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 15px auto;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 124px;
+    }
+  }
+
+  /**************************************************************
+  ********Navigation style on medium and small devices****************
+  **************************************************************/
+  .container {
+    max-width: 100% !important;
+    margin: 0 auto;
+    left: 0;
+  }
+
+  .sidebar {
+    width: 60%;
+  }
+
+  .sidebar.hide-sidebar {
+    left: -500px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  #menu-toggler {
+    display: inline;
+    position: absolute;
+    z-index: 10;
+    color: $secondary;
+    left: 10px;
+    top: 3%;
+    cursor: pointer;
+  }
+
+  #close-nav {
+    display: inline;
+    position: absolute;
+    left: 80%;
+    z-index: 100;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      color: red;
+    }
+  }
+
+  /*.login-form {
+    position: relative;
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+      background-image: url("../assets/images/logo.png");
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      background-size: contain;
+    }
+
+    input {
+      background: inherit;
+    }
+  }*/
+}
+
+@import "~bootstrap/scss/bootstrap.scss";

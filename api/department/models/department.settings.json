@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "departments",
+  "info": {
+    "name": "Department"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Faculty": {
+      "model": "faculty",
+      "via": "departments"
+    },
+    "courses": {
+      "via": "Department",
+      "collection": "course"
+    },
+    "students": {
+      "via": "department",
+      "collection": "student"
+    }
+  }
+}

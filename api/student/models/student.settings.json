@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "name": "Student",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Matric_num": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Level": {
+      "type": "integer",
+      "required": true
+    },
+    "courses": {
+      "via": "students",
+      "collection": "course",
+      "dominant": true
+    },
+    "department": {
+      "model": "department",
+      "via": "students"
+    },
+    "faculty": {
+      "model": "faculty",
+      "via": "students"
+    },
+    "Password": {
+      "type": "password",
+      "default": "123456",
+      "maxLength": 15,
+      "private": true,
+      "minLength": 6,
+      "required": true
+    }
+  }
+}
