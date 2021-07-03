@@ -7,7 +7,7 @@ import { Home, List, Settings, UserPlus, Menu, X } from "react-feather";
 import photo from "../assets/images/user-avatar.svg.png";
 import { logout } from "../actions/authActions";
 
-function NavBar({ logout }) {
+function NavBar({ user, logout }) {
   const [openNav, setOpenNav] = useState(false);
 
   const toggleNav = () => setOpenNav((openNav) => !openNav);
@@ -21,7 +21,7 @@ function NavBar({ logout }) {
             <img src={photo} alt="user_avatar" />
           </Link>
           <Link to="/profile">
-            <h3>user name</h3>
+            <h3>{user?.username}</h3>
           </Link>
         </div>
         <ul className="sidebar-list">
@@ -56,4 +56,8 @@ function NavBar({ logout }) {
   );
 }
 
-export default connect(null, { logout })(NavBar);
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps, { logout })(NavBar);

@@ -13,31 +13,59 @@ export const loadUser = () => (dispatch, getState) => {
 
 export const login =
   ({ identifier, password }) =>
-  (dispatch) => {
+  async (dispatch) => {
     const body = JSON.stringify({ identifier, password });
 
-    return (
-      fetch("auth/local", {
+    try {
+      const res = await fetch("auth/local", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body,
-      })
-        .then((res) => {
-          if (res.status !== 200 && res.status !== 201)
-            return dispatch({ type: LOGIN_FAIL });
+      });
 
-          return dispatch({ type: LOGIN_SUCCESS, payload: res.json() });
-        })
-        // .then((data) => {
-        //   dispatch({ type: LOGIN_SUCCESS, payload: data });
-        // })
-        .catch((err) => {
-          console.log(err);
-          dispatch({ type: LOGIN_FAIL });
-        })
-    );
+      //if Login fails
+      if (!res.ok) {
+        dispatch({ type: LOGIN_FAIL });
+        const data = await res.json();
+        console.log(data);
+        //TODO: add an error/message state
+        alert("Login failed: Invalid login credentials");
+        return;
+      }
+
+      const data = await res.json();
+      return dispatch({ type: LOGIN_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({ type: LOGIN_FAIL });
+      //TODO: add err message to app state
+      alert("Login Failed: Server error.");
+      console.log(err);
+    }
+
+    // return (
+    //   fetch("auth/local", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body,
+    //   })
+    //     .then((res) => {
+    //       if (res.status !== 200 && res.status !== 201)
+    //         return dispatch({ type: LOGIN_FAIL });
+
+    //       return dispatch({ type: LOGIN_SUCCESS, payload: res.json() });
+    //     })
+    //     // .then((data) => {
+    //     //   dispatch({ type: LOGIN_SUCCESS, payload: data });
+    //     // })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       dispatch({ type: LOGIN_FAIL });
+    //     })
+    // );
   };
 
 export const logout = () => {

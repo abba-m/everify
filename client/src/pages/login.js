@@ -1,11 +1,11 @@
-import { Container, Row, Col } from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 import logo from "../assets/images/logo.png";
 import LoginForm from "../components/loginForm";
 
 function Login() {
   return (
-    <Container>
+    <div className="login-container">
       <Row className="h-100 my-auto my-md-5">
         <Col sm="12" md="6" className="align-self-center m-auto">
           <div className="login-img">
@@ -22,7 +22,7 @@ function Login() {
           <LoginForm />
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }
 
