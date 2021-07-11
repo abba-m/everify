@@ -2,11 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Spinner } from "reactstrap";
 
 //App state/store imports
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 //App store - redux
 import rootReducer from "./reducers";
@@ -17,10 +22,22 @@ import Slide from "@material-ui/core/Slide";
 
 import "./styles/custom.scss";
 
+//Redux-persist config
+const persistConfig = {
+  key: "root",
+  storage,
+  stateReconciler: autoMergeLevel2,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+const persistor = persistStore(store);
+//End of redux persis
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,12 +46,14 @@ ReactDOM.render(
         vertical: "top",
         horizontal: "right",
       }}
-      maxSnack={2}
+      maxSnack={1}
       TransitionComponent={Slide}
       dense
     >
       <Provider store={store}>
-        <App />
+        <PersistGate loading={<Spinner />} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </SnackbarProvider>
   </React.StrictMode>,

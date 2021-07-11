@@ -12,6 +12,7 @@ const initialState = {
   isAuthenticated: null,
   isLoading: false,
   user: null,
+  //TODO: errors: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -22,14 +23,22 @@ export default function authReducer(state = initialState, action) {
         isLoading: true,
       };
     case USER_LOADED:
-    case LOGIN_SUCCESS:
-      localStorage.setItem("token", action.payload.jwt);
       return {
         ...state,
         token: localStorage.getItem("token"),
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload.user,
+        user: localStorage.getItem("user"),
+      };
+    case LOGIN_SUCCESS:
+      localStorage.setItem("token", action.payload.jwt);
+      localStorage.setItem("user", action.payload.user);
+      return {
+        ...state,
+        token: localStorage.getItem("token"),
+        isAuthenticated: true,
+        isLoading: false,
+        user: localStorage.getItem("user"),
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:

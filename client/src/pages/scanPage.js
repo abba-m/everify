@@ -1,29 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Button, Card, Input, Col, Row } from "reactstrap";
 import { Camera, X } from "react-feather";
 
 import { connect } from "react-redux";
 
+import { useSnackbar } from "notistack";
+
 import QrReaderComponent from "../components/qrReader";
 import { doVibrate, verifyCandidate } from "../utils";
 import avatar from "../assets/images/user-avatar.svg.png";
 
-import { useSnackbar } from "notistack";
+import { onScanSuccess } from "../actions/candidatesActions";
 
-function ScanPage({ course }) {
+function ScanPage({
+  dispatch,
+  course,
+  registeredCandidates,
+  verifiedCandidates,
+}) {
   const [openCam, setOpenCam] = useState(false);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState(null);
 
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar("");
+
+  useEffect(() => {
+    if (result === null) return;
+    if (result) {
+      enqueueSnackbar("Verified", { variant: "success" });
+      dispatch(onScanSuccess(result));
+    } else {
+      enqueueSnackbar("Not Verified", { variant: "error" });
+    }
+  }, [result, enqueueSnackbar, dispatch]);
 
   const toggleScan = () => setOpenCam(!openCam);
 
   const handleScan = (data) => {
     if (data) {
       doVibrate(300);
-      setResult(verifyCandidate(data));
+      setResult(verifyCandidate(registeredCandidates, data));
       toggleScan();
-      enqueueSnackbar("Verified", { variant: "success" });
     }
   };
 
@@ -45,7 +61,7 @@ function ScanPage({ course }) {
           </Input>
         </div>
         <div className="total-scan-display styled-text">
-          <h4>Scans: 0</h4>
+          <h4>Scans: {verifiedCandidates.length}</h4>
         </div>
       </div>
       <div className="d-scan-page-button">
@@ -62,11 +78,11 @@ function ScanPage({ course }) {
           <Row>
             <Col>
               <h4>Name:</h4>
-              <p>{result.name}</p>
+              <p>{result.Name}</p>
               <h4>Matric No.:</h4>
-              <p>{result.matric}</p>
+              <p>{result.Matric_num}</p>
               <h4>Level:</h4>
-              <p>{result.level}</p>
+              <p>{result.Level}</p>
             </Col>
             <Col>
               <img
@@ -92,6 +108,8 @@ function ScanPage({ course }) {
 
 const mapStateToProps = (state) => ({
   course: state.courseDetails.course,
+  registeredCandidates: state.candidates.registeredCandidates,
+  verifiedCandidates: state.candidates.verifiedCandidates,
 });
 
 export default connect(mapStateToProps)(ScanPage);

@@ -20,7 +20,7 @@ import ScanPage from "./pages/scanPage";
 import List from "./pages/list";
 import Settings from "./pages/settings";
 import Profile from "./pages/profile";
-//import NotFound from "./pages/notFound";
+// import NotFound from "./pages/notFound";
 import QrCode from "./components/qrCodeGen";
 
 function App({ isAuthenticated, user, logout }) {

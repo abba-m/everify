@@ -9,6 +9,11 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 
 export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
+
+  //get token from local storage
+  //const token = getState().auth.token
+
+  //tokenConfig(getState)
 };
 
 export const login =
@@ -43,29 +48,6 @@ export const login =
       alert("Login Failed: Server error.");
       console.log(err);
     }
-
-    // return (
-    //   fetch("auth/local", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body,
-    //   })
-    //     .then((res) => {
-    //       if (res.status !== 200 && res.status !== 201)
-    //         return dispatch({ type: LOGIN_FAIL });
-
-    //       return dispatch({ type: LOGIN_SUCCESS, payload: res.json() });
-    //     })
-    //     // .then((data) => {
-    //     //   dispatch({ type: LOGIN_SUCCESS, payload: data });
-    //     // })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       dispatch({ type: LOGIN_FAIL });
-    //     })
-    // );
   };
 
 export const logout = () => {

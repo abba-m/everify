@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 //import { Redirect, Route } from "react-router";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
@@ -15,6 +15,7 @@ import {
   changeDepartment,
   changeCourse,
 } from "../actions/courseActions";
+import { fetchCandidates } from "../actions/candidatesActions";
 
 function CourseForm({ dispatch, faculty, department, course }) {
   // const [faculty, setFaculty] = useState("");
@@ -27,16 +28,17 @@ function CourseForm({ dispatch, faculty, department, course }) {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
 
-  // useEffect(() => {
-  //   console.log({ faculty, department, course });
-  // }, [faculty, department, course]);
+  useEffect(() => {
+    dispatch(fetchCandidates(course));
+  }, [dispatch, course]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (course === "Select course") return enqueueSnackbar("Please fill out course details", {
-      variant: "warning"
-    });
+    if (course === "Select course")
+      return enqueueSnackbar("Please fill out course details", {
+        variant: "warning",
+      });
 
     history.push("/home/scan/");
   };

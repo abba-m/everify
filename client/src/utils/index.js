@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import {
   ACC,
   AED,
@@ -104,96 +103,9 @@ export function generateCoursesList(dpt) {
   }
 }
 
-export const registeredStudents = [
-  {
-    id: uuidv4(),
-    name: "Amina Musa Kura",
-    matric: "",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Muktar Alhaji",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Sadiq Usman",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Muhammad Gana",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Panshak Zamani",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Abigail Alex",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Audrey Bill",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Caroline Ayomide",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Bernadette Shehu",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Rebecca John",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Aisha Sani",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-  {
-    id: uuidv4(),
-    name: "Rahma Abubakar",
-    matric: "u16/fns/csc/1024",
-    password: 123456,
-    level: "400",
-  },
-];
-
-export function verifyCandidate(uniqueId) {
+export function verifyCandidate(cdtList, uniqueId) {
   //TODO: encrypt/decrypt uniqueId
-  let user = registeredStudents.find((cdt) => cdt.matric === uniqueId);
+  let candidate = cdtList.find((cdt) => cdt.Matric_num === uniqueId);
 
-  return user;
+  return candidate;
 }

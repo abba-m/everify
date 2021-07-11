@@ -1,5 +1,4 @@
 export const CSC = [
-  "select-course",
   "CSC 201",
   "CSC 203",
   "CSC 205",
