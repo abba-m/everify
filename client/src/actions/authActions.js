@@ -22,13 +22,16 @@ export const login =
     const body = JSON.stringify({ identifier, password });
 
     try {
-      const res = await fetch("auth/local", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
+      const res = await fetch(
+        `https://shielded-shelf-39918.herokuapp.com/auth/local`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body,
+        }
+      );
 
       //if Login fails
       if (!res.ok) {

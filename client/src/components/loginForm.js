@@ -11,7 +11,7 @@ function LoginForm({ dispatch, isAuthenticated }) {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
-  const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
+  const { value: email, bind: bindEmail } = useInput("");
   const {
     value: password,
     bind: bindPassword,
@@ -32,11 +32,11 @@ function LoginForm({ dispatch, isAuthenticated }) {
       password,
     };
 
+    enqueueSnackbar("Processing Login", { variant: "info" });
     dispatch(login(loginCredentials));
 
     if (isAuthenticated) history.push("/home");
 
-    resetEmail();
     resetPassword();
   };
 

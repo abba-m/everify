@@ -27,7 +27,9 @@ export function fetchCandidates(courseCode) {
     dispatch(getCandidates());
 
     try {
-      const response = await fetch(`courses?Code=${courseCode}`);
+      const response = await fetch(
+        `https://shielded-shelf-39918.herokuapp.com/courses?Code=${courseCode}`
+      );
       const res = await response.json();
       const data = await res[0].students;
 
