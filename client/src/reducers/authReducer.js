@@ -2,6 +2,7 @@ import {
   USER_LOADING,
   USER_LOADED,
   AUTH_ERROR,
+  PROCESS_LOGIN,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
@@ -18,6 +19,7 @@ const initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
+    case PROCESS_LOGIN:
       return {
         ...state,
         isLoading: true,

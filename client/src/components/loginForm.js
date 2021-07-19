@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useInput } from "../hooks/input_hook";
 import { login } from "../actions/authActions";
 
-function LoginForm({ dispatch, isAuthenticated }) {
+function LoginForm({ dispatch, isAuthenticated, isLoading }) {
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
@@ -60,8 +60,8 @@ function LoginForm({ dispatch, isAuthenticated }) {
           required
         />
       </FormGroup>
-      <Button color="secondary" block>
-        Login
+      <Button color="secondary" block disabled={isLoading}>
+        {isLoading ? "Please wait..." : "Login"}
       </Button>
     </Form>
   );
@@ -69,6 +69,7 @@ function LoginForm({ dispatch, isAuthenticated }) {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isLoading: state.auth.isLoading,
 });
 
 export default connect(mapStateToProps)(LoginForm);
