@@ -32,7 +32,7 @@ function LoginForm({ dispatch, isAuthenticated, isLoading }) {
       password,
     };
 
-    enqueueSnackbar("Processing Login", { variant: "info" });
+    //enqueueSnackbar("Processing Login", { variant: "info" });
     dispatch(login(loginCredentials));
 
     if (isAuthenticated) history.push("/home");

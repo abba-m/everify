@@ -20,7 +20,7 @@ export const login =
   async (dispatch) => {
     const body = JSON.stringify({ identifier, password });
 
-    dispatch(processLogin);
+    dispatch({ type: PROCESS_LOGIN });
 
     try {
       const res = await fetch(
@@ -53,8 +53,6 @@ export const login =
       console.log(err);
     }
   };
-
-export const processLogin = () => ({ type: PROCESS_LOGIN });
 
 export const logout = () => {
   return { type: LOGOUT_SUCCESS };
